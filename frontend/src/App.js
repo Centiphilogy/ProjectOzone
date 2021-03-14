@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import {BrowserRouter as Router} from 'react-router-dom'
 
-function App() {
+import Header from './components/mainComponents/Header'
+import LoginPage from './components/LoginPage'
+import RegisterPage from './components/RegisterPage'
+
+import './styles/App.css';
+
+const App = () => {
+
+  const [isLoginPageActive, setIsLoginPageActive] = useState(false);
+  const [isRegisterPageActive, setIsRegisterPageActive] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+          <Header loginActive={isLoginPageActive} loginActiveChange={setIsLoginPageActive} registerActive={isRegisterPageActive} registerActiveChange={setIsRegisterPageActive}/>
+      </Router>
+      {isLoginPageActive && LoginPage}
+      {isRegisterPageActive && RegisterPage}
+      <main>
+      </main>
+      <footer>
+      </footer>
+    </>
   );
 }
 
